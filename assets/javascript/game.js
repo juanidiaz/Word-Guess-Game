@@ -82,7 +82,7 @@ function getNewWord() {
     guess = [];
     guessedletters = [];
 
-    document.getElementById('hintImage').innerHTML = "<h2>HINT IMAGE</h2><img src=\"./assets/images/_" + word + ".png\" alt=\"Hint image\" id=\"hintCanvas\">";
+    document.getElementById('hintImage').innerHTML = "<h2>HINT IMAGE XX</h2><img src=\"./assets/images/" + word + ".png\" alt=\"Hint image\" id=\"hintCanvas\">";
 
     // Create GUESS word with -
     for (var i = 0; i < word.length; i++) {
