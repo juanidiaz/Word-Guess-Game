@@ -11,6 +11,7 @@ var matches = 0;
 var badguess = 0;
 
 var miss = false;
+var gamedone = true;
 
 // DEBUG FUNCTIONS --------------------------------------------
 
@@ -42,11 +43,8 @@ function isKeyInWord() {
     if (!isinword) {
         lives--;
         badguess++;
-        if (lives < 1) {
-            // Display GAME OVER
-            document.getElementById('guesses').innerHTML = "<h1 style=\"color: red; background-color:white;\">GAME OVER!!!</h1>";
-        }
     }
+
     updateGame();
 }
 
@@ -54,15 +52,27 @@ function isKeyInWord() {
 function updateGame() {
     // Print the GUESS word
     document.getElementById('gameArea').innerHTML = guess.join(' ');
-    document.getElementById('gameStats').innerHTML = "<p><b>Lives left: </b>" + lives + "</p><b>Wrong guesses: </b>" + badguess;
+    document.getElementById('gameStats').innerHTML = "<p><b>Lives left: </b>" + lives + "</p><b>Wrong guesses: </b>" + badguess + "</p><b>Games won: </b>" + matches;
+    document.getElementById('guesses').innerHTML = "<p style=\"font-size: 1.5rem;\">Already guessed letters:</p>" + guessedletters;
 
     if (guess.indexOf("-") == -1) {
         // Display YOU WIN!
         document.getElementById('gameArea').innerHTML = "<h1 style=\"color: red; background-color:white;\">YOU WIN!!!</h1>";
+        matches++;
+        gamedone = true;
     }
     else {
         document.getElementById('gameArea').innerHTML = guess.join(' ');
     }
+
+    if (lives < 1) {
+        console.log("BUT NOT HERE");
+        // Display GAME OVER
+        document.getElementById('gameArea').innerHTML = "<h1 style=\"color: red; background-color:white;\">GAME OVER!!!</h1>";
+        gamedone = true;
+    }
+
+
 }
 
 // Select randomly a the WORD from the WORDPOOL array
@@ -71,13 +81,16 @@ function getNewWord() {
     word = wordpool[Math.floor(Math.random() * wordpool.length)];
     console.log("Word selected: " + word);
 
+    guess = [];
+    guessedletters = [];
+
     document.getElementById('hintImage').innerHTML = "<h2>HINT IMAGE</h2><img src=\"./assets/images/_" + word + ".png\" alt=\"Hint image\" id=\"hintCanvas\">";
 
     // Create GUESS word with -
     for (var i = 0; i < word.length; i++) {
         guess.push('-');
     }
-
+    gamedone = false;
     updateGame();
 }
 
@@ -129,6 +142,12 @@ document.onkeyup = function (event) {
     keyinput = event.key.toLocaleLowerCase();
     console.log("Selected key: " + keyinput);
 
+    if (event.keyCode == 32 && gamedone) {
+        console.log("User clicked space bar");
+        getNewWord();
+        return;
+    }
+
     // If the KEYINPUT is not a LETTER stop and exit
     if (!isValidKey(keyinput)) {
         console.log("The key is not a letter!")
@@ -148,10 +167,10 @@ document.onkeyup = function (event) {
     guessedletters.push(keyinput);
 
     // Print the guessed letters
-    document.getElementById('guesses').innerHTML = "Already guessed letters: " + guessedletters;
+    document.getElementById('guesses').innerHTML = "<p style=\"font-size: 1.5rem;\">Already guessed letters:</p>" + guessedletters;
 
     // Check if KEYINPUT is in WORD
     isKeyInWord()
 }
 
-getNewWord();
+// getNewWord();
