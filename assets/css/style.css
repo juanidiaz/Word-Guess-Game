@@ -13,6 +13,8 @@ body{
 #hintImage{
     /* background-color: rgba(137, 43, 226, 0.5); */
     text-align: center;
+    color: #ff3b2b;
+    text-shadow: 2px 2px 7px #111111;
 }
 
 #hintCanvas{
@@ -24,13 +26,14 @@ body{
     font-size: 80px;
     font-weight: bolder;
     text-align: center;
-    /* padding: 40px; */
+    text-shadow: 2px 2px 7px #111111;
 }
 
 #guesses{
-    font-size: 50px;
+    font-size: 30px;
     font-weight: bolder;
-    
+    text-shadow: 2px 2px 7px #111111;
+    color: beige;
 }
 
 

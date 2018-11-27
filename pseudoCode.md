@@ -5,7 +5,7 @@
 # Arrays
 letters     = each letter of the alphabet           (Starts = ['a' 'b' 'c' .... 'z'])
 wordpool    = possible words to randombly choose    (Starts = ["string1", "string2" ... "string20"])
-guessletter = list of letters already picked
+guessedletters = list of letters already picked
 
 # Integers
 lives       = number of errors the user can have    (Starts = 10)
@@ -30,7 +30,7 @@ win         = The user won the match
 # Redraw page (GAME)
 - Show played games (MATCHES)
 - Show lives left (LIVES)
-- Show list of letters used (GUESSLETTER)
+- Show list of letters used (GUESSEDLETTERS)
 - Show the status of the game (GUESS)
 - Show hint image
 - Check if the guess word has any '-' left
@@ -54,11 +54,11 @@ win         = The user won the match
 
 ## Probing
 - get KEY
-- compare the KEY to GUESSLETTER to see if it has been used before
+- compare the KEY to GUESSEDLETTERS to see if it has been used before
     + if used letter, alert user to pick another letter
 - compare KEY to each character of WORD
     FOR EACH:
-    + if KEY is a match add KEY to GUESSLETTER array
+    + if KEY is a match add KEY to GUESSEDLETTERS array
                         replace letter position from WORD to '-'
                         replace '-' from GUESS to KEY
     + if KEY is NOT a match set MISS to TRUE
