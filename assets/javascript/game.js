@@ -57,22 +57,20 @@ function updateGame() {
 
     if (guess.indexOf("-") == -1) {
         // Display YOU WIN!
-        document.getElementById('gameArea').innerHTML = "<h1 style=\"color: red; background-color:white;\">YOU WIN!!!</h1>";
+        console.log("Winner!!!");
         matches++;
+        document.getElementById('gameArea').innerHTML = "<h1 style=\"color: red; background-color:white;\">YOU WIN!!!</h1>";
+        gamedone = true;
+    }
+    else if (lives < 1) {
+        // Display GAME OVER
+        console.log("Not enough lifes left!");
+        document.getElementById('gameArea').innerHTML = "<h1 style=\"color: red; background-color:white;\">GAME OVER!!!</h1>";
         gamedone = true;
     }
     else {
         document.getElementById('gameArea').innerHTML = guess.join(' ');
     }
-
-    if (lives < 1) {
-        console.log("BUT NOT HERE");
-        // Display GAME OVER
-        document.getElementById('gameArea').innerHTML = "<h1 style=\"color: red; background-color:white;\">GAME OVER!!!</h1>";
-        gamedone = true;
-    }
-
-
 }
 
 // Select randomly a the WORD from the WORDPOOL array
