@@ -2,7 +2,7 @@
 
 //      ARRAYS
 var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-var wordpool = ["barney", "bart", "carl", "edna", "homer", "krusty", "lenny", "lisa", "marge", "millhouse", "moe", "ned", "ralph", "todd"];
+var wordpool = ["agnes", "barney", "bart", "carl", "edna", "homer", "kent", "krusty", "lenny", "lisa", "marge", "martin", "milhouse", "moe", "ned", "nelson", "patty", "ralph", "rod", "selma", "seymour", "todd", "tony", "troy", "waylon", "willie"];
 var guessedletters = [];
 
 //      STRINGS/CHAR
@@ -15,10 +15,12 @@ var lives = 10;
 var matchesWin = 0;
 var matchesLost = 0;
 var badguess = 0;
+var wordIndex = -1;
 
 //      BOOLEAN
 var miss = false;
 var gamedone = true;
+var challengedone = false;
 
 // ------------------------------------------------------------
 
@@ -59,28 +61,56 @@ function updateGame() {
 
     if (guess.indexOf("-") == -1) {
         // Display YOU WIN!
-        console.log("Winner!!!");
+        console.log("All letter guessed, win game.");
         matchesWin++;
-        document.getElementById('gameArea').innerHTML = "<div id=\"gameMessage\">YOU WIN!!!<hr><div id=\"sm\">Press the SPACEBAR to play again</dvi></dvi>";
+        wordpool.splice(wordIndex, 1);
+        document.getElementById('gameArea').innerHTML = "<div id=\"gameMessage\">YOU WIN " + matchesWin + " GAMES!!!<hr><div id=\"sm\">Press the SPACEBAR to play again</dvi></dvi>";
         document.getElementById('guesses').innerHTML = "";
         gamedone = true;
+        console.log("wordpool.length: " + wordpool.length);
     }
     else if (lives < 1) {
         // Display GAME OVER
-        console.log("Not enough lifes left!");
+        console.log("Not enough lifes left, game over.");
         document.getElementById('gameArea').innerHTML = "<div id=\"gameMessage\">GAME OVER!!!<hr><div id=\"sm\">Press the SPACEBAR to play again</dvi></dvi>";
         document.getElementById('guesses').innerHTML = "";
     }
 
+    if (wordpool.length < 1) {
+        // If all words have been guessed YOU WIN THE GAME
+        console.log("All names guessed, win challenge.")
+        document.getElementById('gameArea').innerHTML = "<div id=\"gameMessage\">YOU GUESSED ALL THE CHARACTERS!!!<hr><div id=\"sm\">Press the SPACEBAR to play again</dvi></dvi>";
+        document.getElementById('guesses').innerHTML = "";
+        gamedone = true;
+        challengedone = true;
+    }
+
     // Display the game stats
+    console.log("gamedone: " + gamedone);
+    console.log("challengedone: " + challengedone);
     document.getElementById('gameStats').innerHTML = "<p><b>Lives left: </b>" + lives + "</p><b>Wrong guesses: </b>" + badguess + "</p><b>Games won: </b>" + matchesWin + "</p><b>Games lost: </b>" + matchesLost;
 }
 
 // Select randomly a the WORD from the WORDPOOL array
 function getNewWord() {
 
+    if (challengedone) {
+        // Reset variables to initial values
+        lives = 10;
+        matchesWin = 0;
+        matchesLost = 0;
+        badguess = 0;
+        wordpool = ["agnes", "barney", "bart", "carl", "edna", "homer", "kent", "krusty", "lenny", "lisa", "marge", "martin", "milhouse", "moe", "ned", "nelson", "patty", "ralph", "rod", "selma", "seymour", "todd", "tony", "troy", "waylon", "willie"];
+
+        // Set challenge mode ON
+        challengedone = false;
+    }
+
+    // Select an index number based on the WORDPOOL array
+    wordIndex = Math.floor(Math.random() * wordpool.length)
+
     // Randomly pick a word
-    word = wordpool[Math.floor(Math.random() * wordpool.length)];
+    word = wordpool[wordIndex];
 
     // Show the word to the log... for cheaters!
     console.log("Word selected: " + word);
@@ -101,9 +131,9 @@ function getNewWord() {
         guess.push('-');
     }
 
-    // Set game mode OFF
+    // Set game mode ON
     gamedone = false;
-    
+
     // Update the labels
     updateGame();
 }
@@ -153,12 +183,12 @@ document.onkeyup = function (event) {
 
     // Take the typed key as lower case
     keyinput = event.key.toLocaleLowerCase();
-    console.log("Selected key: " + keyinput);
+    console.log("Pressed key: " + keyinput);
 
     if (!gamedone) {
         // If the KEYINPUT is not a LETTER stop and exit
         if (!isValidKey(keyinput)) {
-            console.log("The key is not a letter!")
+            console.log("The key is not a letter.")
             return;
         }
 
@@ -166,7 +196,7 @@ document.onkeyup = function (event) {
 
         // If the KEYINPUT is not a LETTER stop and exit
         if (!isNewKey(keyinput)) {
-            console.log("The key has been used before!")
+            console.log("The key has been used before.")
             return;
         }
 
