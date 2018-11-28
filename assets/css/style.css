@@ -23,6 +23,7 @@ h3{
 
 #hintCanvas{
     height: 200px;
+    border: 6px solid #e9c920;
 }
 
 #gameArea{
@@ -45,3 +46,31 @@ li{
     font-size: 15px;
 }
 
+#footerNav{
+    position: fixed;
+    bottom: 0;
+    z-index: 1030;
+    max-width: 100%;
+}
+
+#footerLine {
+	background-color: #e9c920;
+	height: 5px;
+}
+
+#footer{
+    background-color: rgb(42, 42, 42);
+	text-align: center;
+	font-size: 10px;
+}
+
+#gameMessage{
+    color: #ff3b2b;
+    font-size: 3.5rem;
+    padding: 20px;
+}
+
+#sm{
+    color: #e9c920;
+    font-size: 1.25rem;
+}
