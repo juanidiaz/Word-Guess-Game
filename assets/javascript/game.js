@@ -64,7 +64,7 @@ function updateGame() {
         console.log("All letter guessed, win game.");
         matchesWin++;
         wordpool.splice(wordIndex, 1);
-        document.getElementById('gameArea').innerHTML = "<div id=\"gameMessage\">YOU WIN " + matchesWin + " GAMES!!!<hr><div id=\"sm\">Press the SPACEBAR to play again</dvi></dvi>";
+        document.getElementById('gameArea').innerHTML = "<div id=\"gameMessage\">YOU WON THIS MATCH!!!<hr><div id=\"sm\">Press the SPACEBAR to play again</dvi></dvi>";
         document.getElementById('guesses').innerHTML = "";
         gamedone = true;
         console.log("wordpool.length: " + wordpool.length);
