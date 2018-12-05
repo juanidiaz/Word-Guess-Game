@@ -1,7 +1,7 @@
 ###
 ### Project name:   Word-Guess-Game 
 ### Cretaed by:     Juan I Diaz (jdi@idiaz.ca)
-### Date:           November  2019
+### Date:           November 2018
 ### 
 
 ### DESCRIPTION
@@ -30,7 +30,7 @@ clues. The project is meant to test the knowledge of JavaScript and reafirm HTML
 
 
 # TIPS
-- If yo uwant to get some inside information you can always use the console (Google Chrome
+- If yo uwant to get some inside information you can always use the console (Google Chrome)
 
 
 # QUESTIONS OR COMMENTS
