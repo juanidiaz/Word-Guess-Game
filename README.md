@@ -29,8 +29,7 @@ clues. The project is meant to test the knowledge of JavaScript and reafirm HTML
 ![Loser screen](./assets/images/lose.png)
 
 ## BUILDING TOOLS
-- HTML, CSS
-- Javascript and jQuery
+- HTML, CSS and Javascript
 - Bootstrap v4
 
 
